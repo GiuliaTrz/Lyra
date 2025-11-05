@@ -1,3 +1,21 @@
+:root {
+    --bg-color: #F9EAE1;
+    --title-font-size: 60px;
+
+}
+
 body {
-  background: #F9EAE1!important;
+    background: var(--bg-color) !important;
+}
+
+#center-column {
+    padding-top: 10%;
+}
+
+#app-title {
+    font-size: var(--title-font-size);
+}
+
+img {
+    border: 1px solid red;
 }
