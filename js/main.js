@@ -1,3 +1,4 @@
+
 const configModal = new bootstrap.Modal(document.getElementById('configModal'));
 const configModalbtnSave = document.getElementById("configModalbtnSave");
 
@@ -7,6 +8,9 @@ const txtbApiSecret = document.getElementById("txtbApiSecret");
 const appConfig = new LocalStorageDB("lyra-config");
 
 const ipAddressApi = "http://ip-api.com/json?fields=lat,lon,status";
+const baseUrl = "https://api.astronomyapi.com/api/v2/studio/moon-phase";
+
+const moonPhaseImage = document.getElementById("moonPhaseImage");
 
 /**
  * The first function called when the page is loaded
@@ -15,6 +19,7 @@ function main(){
     registerEvents();
     // Shows the configuration modal if the app is not initialized
     if(!isInitialized()) configModal.show();
+    fetchPhase();
 }
 
 
@@ -77,6 +82,54 @@ function findPositionFromIpAddress(callback) {
 
 function formatDate(){
     return new Date().toISOString().split('T')[0];
+}
+
+function fetchPhase(){
+    var position;
+
+    findPositionFromIpAddress(function(response) {
+    if (response) {
+        position = response;
+        const appSecret = btoa(appConfig.get("api-app-id") + ":" + appConfig.get("api-secret"));
+            var result;
+        (async () => {
+            const rawResponse = await fetch(baseUrl, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + appSecret
+                },
+                body: JSON.stringify(
+                                    {
+                                      "format": "svg",
+                                      "style": {
+                                        "moonStyle": "default",
+                                        "backgroundStyle": "solid",
+                                        "backgroundColor": "#FAE3E3"
+                                      },
+                                      "observer": {
+                                        "latitude": position.lat,
+                                        "longitude": position.lon,
+                                        "date": formatDate(),
+                                      },
+                                      "view": {
+                                        "type": "portrait-simple",
+                                        "orientation": "south-up"
+                                      }
+                                    })
+            });
+            const content = await rawResponse.json();
+
+            console.log(content);
+            moonPhaseImage.src = content.data.imageUrl
+        })();
+    } else {
+        console.error('Unable to find position');
+    }
+    });
+
+    
 }
 
 main();

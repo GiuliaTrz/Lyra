@@ -1,11 +1,12 @@
 :root {
-    --bg-color: #F9EAE1;
+    --bg-color: #FAE3E3;
     --title-font-size: 60px;
-
+    --font: 'Lora', serif;
 }
 
 body {
     background: var(--bg-color) !important;
+    font: var(--font) !important;
 }
 
 #center-column {
@@ -16,6 +17,3 @@ body {
     font-size: var(--title-font-size);
 }
 
-img {
-    border: 1px solid red;
-}
