@@ -35,8 +35,14 @@ function registerEvents(){
  * is clicked (configModal)
  */
 function onConfigModalBtnSaveClicked(){
+    if(txtbAppId.value == "" || txtbApiSecret.value == ""){
+        alert("Invalid Data!");
+        return;
+    }
+
     saveApiSecret(txtbAppId.value, txtbApiSecret.value);
     configModal.hide();
+    window.location.reload(); // Reloads the page
 }
 
 /**
@@ -47,6 +53,7 @@ function onConfigModalBtnSaveClicked(){
 function saveApiSecret(appId, secret){
     appConfig.save("api-app-id",appId);
     appConfig.save("api-secret",secret);
+    
 }
 
 /**

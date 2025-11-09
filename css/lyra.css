@@ -17,3 +17,7 @@ body {
     font-size: var(--title-font-size);
 }
 
+#moonPhaseImage {
+    width: 270px;
+    height: 330px;
+}
