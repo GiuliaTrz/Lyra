@@ -7,7 +7,7 @@ const txtbApiSecret = document.getElementById("txtbApiSecret");
 
 const appConfig = new LocalStorageDB("lyra-config");
 
-const ipAddressApi = "https://ip-api.com/json?fields=lat,lon,status";
+const ipAddressApi = "https://free.freeipapi.com/api/json/";
 const baseUrl = "https://api.astronomyapi.com/api/v2/studio/moon-phase";
 
 const moonPhaseImage = document.getElementById("moonPhaseImage");
@@ -75,7 +75,7 @@ function findPositionFromIpAddress(callback) {
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(this.responseText);
-            if(response.status !== 'success') {
+            if(response.ipAddress == '') {
                 console.log('query failed: ' + response.message);
                 callback(null);
                 return;
@@ -116,8 +116,8 @@ function fetchPhase(){
                                         "backgroundColor": "#FAE3E3"
                                       },
                                       "observer": {
-                                        "latitude": position.lat,
-                                        "longitude": position.lon,
+                                        "latitude": position.latitude,
+                                        "longitude": position.longitude,
                                         "date": formatDate(),
                                       },
                                       "view": {
