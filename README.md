@@ -19,4 +19,4 @@ Lyra is a webapp with a minimalist and calming UI that shows you the current pha
 
 ## API
 - [astronomyapi.com](https://astronomyapi.com)
-- [ip-api.com](https://ip-api.com)
+- [freeipapi.com](https://freeipapi.com/)
