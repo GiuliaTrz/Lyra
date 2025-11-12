@@ -7,7 +7,7 @@ const txtbApiSecret = document.getElementById("txtbApiSecret");
 
 const appConfig = new LocalStorageDB("lyra-config");
 
-const ipAddressApi = "http://ip-api.com/json?fields=lat,lon,status";
+const ipAddressApi = "https://ip-api.com/json?fields=lat,lon,status";
 const baseUrl = "https://api.astronomyapi.com/api/v2/studio/moon-phase";
 
 const moonPhaseImage = document.getElementById("moonPhaseImage");
