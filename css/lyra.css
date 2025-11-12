@@ -33,3 +33,7 @@ html, body {
   padding: 15px 0;
   position: relative;
 }
+
+.modal-backdrop {
+  z-index: auto !important;
+}
